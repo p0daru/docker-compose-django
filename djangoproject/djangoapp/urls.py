@@ -31,5 +31,5 @@ urlpatterns = [
     path('orders/delete/<int:pk>/', views.deleteOrder, name='delete_order'),
 
     # Filter orders by date or seller
-    path('orders/filter/<str:filter_value>/', views.filterOrders, name='filter_orders'),
+    path('orders/filter/', views.filterOrders, name='get_orders_by_seller'),
 ]
