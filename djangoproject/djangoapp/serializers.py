@@ -21,6 +21,10 @@ class SellerSerializer(serializers.ModelSerializer):
 
 # Order Serializer
 class OrderSerializer(serializers.ModelSerializer):
+    customer = serializers.PrimaryKeyRelatedField(queryset=Customer.objects.all())
+    ticket = serializers.PrimaryKeyRelatedField(queryset=Ticket.objects.all())
+    seller = serializers.PrimaryKeyRelatedField(queryset=Seller.objects.all())
+
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ['id', 'customer', 'ticket', 'seller', 'order_date']

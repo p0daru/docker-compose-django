@@ -68,14 +68,26 @@ WSGI_APPLICATION = 'djangoproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DB_DRIVER', 'django.db.backends.postgresql'),
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('PG_DB', 'cinema'),
         'USER': os.environ.get('PG_USER', 'admin'),
         'PASSWORD': os.environ.get('PG_PASSWORD', 'admin'),
-        'HOST': os.environ.get('PG_HOST', 'localhost'),
+        'HOST': os.environ.get('PG_HOST', 'db'),
         'PORT': os.environ.get('PG_PORT', '5432'),
+    },
+    'mongoapp': {
+        'ENGINE': 'djongo',
+        'NAME': os.environ.get('MONGO_DB_NAME', 'cinema'),
+        'CLIENT': {
+            'host': os.environ.get('MONGO_DB_HOST', 'mongo'),
+            'port': int(os.environ.get('MONGO_DB_PORT', 27017)),
+            'username': os.environ.get('MONGO_DB_USERNAME', 'admin'),
+            'password': os.environ.get('MONGO_DB_PASSWORD', 'admin'),
+        },
     }
 }
+
+DATABASE_ROUTERS = ['djangoapp.utils.db_routers.CinemaDatabaseRouter', ]
 
 
 # Password validation
